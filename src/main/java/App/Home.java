@@ -46,7 +46,7 @@ public class Home extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Temuuder\\Downloads\\thrift-shop (1).png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\Temuuder\\OneDrive\\Desktop\\POS\\POS-System\\src\\main\\java\\Admin\\thrift-shop (1).png")); // NOI18N
         jLabel1.setText("Thrift Shop");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 218, 72));
 
@@ -65,7 +65,7 @@ public class Home extends javax.swing.JFrame {
         jButton2.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, new java.awt.Color(0, 0, 0)));
         jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 20, 100, 40));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Temuuder\\Downloads\\4155520.jpg")); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("C:\\Users\\Temuuder\\OneDrive\\Desktop\\POS\\POS-System\\src\\main\\java\\App\\4155520.jpg")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
