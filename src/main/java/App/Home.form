@@ -59,9 +59,6 @@
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="24" style="1"/>
             </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\Temuuder\OneDrive\Desktop\POS\POS-System\src\main\java\Admin\thrift-shop (1).png"/>
-            </Property>
             <Property name="text" type="java.lang.String" value="Thrift Shop"/>
           </Properties>
           <Constraints>
@@ -114,7 +111,7 @@
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\Temuuder\OneDrive\Desktop\POS\POS-System\src\main\java\App\4155520.jpg"/>
+          <Image iconType="2" name="C:\Users\asus\OneDrive\Documents\NetBeansProjects\POS-System\src\main\java\App\4155520.jpg"/>
         </Property>
       </Properties>
     </Component>
