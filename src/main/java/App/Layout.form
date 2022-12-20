@@ -1723,11 +1723,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel85">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\asus\Downloads\pngfind.com-air-jordan-png-60645.png"/>
-                    </Property>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JButton" name="buybtn18">
                   <Properties>
@@ -1817,11 +1812,6 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel101">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\asus\Downloads\pngfind.com-air-jordan-png-60645.png"/>
-                    </Property>
-                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -1899,11 +1889,6 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel102">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\asus\Downloads\pngfind.com-air-jordan-png-60645.png"/>
-                    </Property>
-                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -1985,11 +1970,6 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel103">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\asus\Downloads\pngfind.com-air-jordan-png-60645.png"/>
-                    </Property>
-                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -2071,11 +2051,6 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel104">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\asus\Downloads\pngfind.com-air-jordan-png-60645.png"/>
-                    </Property>
-                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -2157,11 +2132,6 @@
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel105">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="2" name="C:\Users\asus\Downloads\pngfind.com-air-jordan-png-60645.png"/>
-                    </Property>
-                  </Properties>
                 </Component>
               </SubComponents>
             </Container>
@@ -2274,11 +2244,6 @@
           </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
-          <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="2" name="C:\Users\asus\OneDrive\Desktop\POS\POS-System\src\main\java\App\thrift-shop (1).png"/>
-            </Property>
-          </Properties>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="40" y="10" width="80" height="60"/>

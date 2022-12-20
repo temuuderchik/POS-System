@@ -6,22 +6,25 @@ package Admin;
 
 import java.awt.Image;
 import java.io.File;
+import java.text.NumberFormat;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.text.NumberFormatter;
 
 /**
  *
  * @author Temuuder
  */
 public class insertProduct extends javax.swing.JFrame {
-     File f = null;
+
+    File f = null;
     String path = null;
     private ImageIcon format = null;
-    String fname=null;
+    String fname = null;
     int s = 0;
-    byte[] pimage=null;
+    byte[] pimage = null;
 
     /**
      * Creates new form insertProduct
@@ -49,16 +52,34 @@ public class insertProduct extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        NumberFormat format = NumberFormat.getInstance();
+        NumberFormatter formatter = new NumberFormatter(format);
+        formatter
+
+        .setValueClass(Integer.class
+
+        );
+        formatter.setMinimum(0);
+        formatter.setMaximum(Integer.MAX_VALUE);
+        formatter.setAllowsInvalid(false);
+        formatter.setCommitsOnValidEdit(true);
+        jFormattedTextField1 = new javax.swing.JFormattedTextField(formatter);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         imagePath.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
-        getContentPane().add(imagePath, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 100, 20));
+        imagePath.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imagePathActionPerformed(evt);
+            }
+        });
+        getContentPane().add(imagePath, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 160, 170, 20));
 
         labelImage.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        getContentPane().add(labelImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 170, 120));
+        getContentPane().add(labelImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 170, 120));
 
         jButton1.setText("Submit");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -66,7 +87,7 @@ public class insertProduct extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 370, -1, -1));
 
         jButton2.setText("Browse");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -74,7 +95,7 @@ public class insertProduct extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 240, -1, -1));
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, -1, -1));
 
         name.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         name.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -82,7 +103,7 @@ public class insertProduct extends javax.swing.JFrame {
                 nameFocusGained(evt);
             }
         });
-        getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 100, 20));
+        getContentPane().add(name, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 170, 20));
 
         descrip.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
         descrip.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -90,7 +111,7 @@ public class insertProduct extends javax.swing.JFrame {
                 descripFocusLost(evt);
             }
         });
-        getContentPane().add(descrip, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 100, 20));
+        getContentPane().add(descrip, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 100, 170, 20));
 
         jLabel1.setText("Name of Product");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
@@ -102,23 +123,34 @@ public class insertProduct extends javax.swing.JFrame {
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, -1, -1));
 
         jButton3.setText("Back");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 340, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 370, -1, -1));
+
+        jLabel5.setText("Price");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, -1, -1));
+
+        jFormattedTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jFormattedTextField1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 40, 170, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-         JFileChooser fileChooser = new JFileChooser();
-        FileNameExtensionFilter fnwf = new FileNameExtensionFilter("PNG JPG AND JPEG", "png","jpeg","jpg");
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter fnwf = new FileNameExtensionFilter("PNG JPG AND JPEG", "png", "jpeg", "jpg");
         fileChooser.addChoosableFileFilter(fnwf);
         int load = fileChooser.showOpenDialog(null);
-        
-        if(load==fileChooser.APPROVE_OPTION){
+
+        if (load == fileChooser.APPROVE_OPTION) {
             f = fileChooser.getSelectedFile();
-            
+
             path = f.getAbsolutePath();
-            descrip.setText(path);
+            imagePath.setText(path);
             ImageIcon ii = new ImageIcon(path);
             Image img = ii.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
             labelImage.setIcon(new ImageIcon(img));
@@ -127,35 +159,41 @@ public class insertProduct extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-         String title = name.getText().toString();
+        String title = name.getText().toString();
         System.out.println(title);
         String description = descrip.getText().toString();
         System.out.println(description);
-        System.out.print("Image Path - "+ path);
-        System.out.print("Image Name - "+ f.getName());
+        System.out.print("Image Path - " + path);
+        System.out.print("Image Name - " + f.getName());
         File f = new File(path);
-        
-        
-         if (title.equals("")) {
+
+        if (title.equals("")) {
             JOptionPane.showMessageDialog(null, "Please enter your Product Name.");
-       }
-            if (description.equals("")) {
+        }
+        if (description.equals("")) {
             JOptionPane.showMessageDialog(null, "Please enter an Image.");
-            }
-            else
-       JOptionPane.showMessageDialog(null, "Your product added successfully");
+        } else
+            JOptionPane.showMessageDialog(null, "Your product added successfully");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void nameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_nameFocusGained
         // TODO add your handling code here:
-       
-     
+
+
     }//GEN-LAST:event_nameFocusGained
 
     private void descripFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_descripFocusLost
         // TODO add your handling code here:
-       
+
     }//GEN-LAST:event_descripFocusLost
+
+    private void imagePathActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imagePathActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_imagePathActionPerformed
+
+    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jFormattedTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,9 +236,11 @@ public class insertProduct extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
+    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel labelImage;
     private javax.swing.JTextField name;
     // End of variables declaration//GEN-END:variables

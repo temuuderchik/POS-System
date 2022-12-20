@@ -6,6 +6,12 @@ package Admin;
 
 import App.Home;
 import App.Layout;
+import entity.ServerObjects;
+import entity.loginobject;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,12 +19,15 @@ import App.Layout;
  */
 public class Login extends javax.swing.JFrame {
 
+    ServerObjects res;
+
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
     }
+    ClientController cont = null;
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -42,13 +51,14 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\asus\\Downloads\\5087579 (1).png")); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/5087579.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 90, 110));
 
-        uname.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        uname.setBackground(new java.awt.Color(204, 204, 204));
+        uname.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         jPanel1.add(uname, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 160, 125, -1));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -59,8 +69,9 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setText("Password");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, -1, -1));
 
+        jButton1.setBackground(new java.awt.Color(204, 204, 204));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon("C:\\Users\\asus\\OneDrive\\Documents\\NetBeansProjects\\POS-System\\src\\main\\java\\User\\unlock (2).png")); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/unlock (2).png"))); // NOI18N
         jButton1.setText("Login");
         jButton1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 0, new java.awt.Color(0, 0, 0)));
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -70,9 +81,11 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 100, 40));
 
-        password.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        password.setBackground(new java.awt.Color(204, 204, 204));
+        password.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         jPanel1.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 230, 120, -1));
 
+        jButton2.setBackground(new java.awt.Color(204, 204, 204));
         jButton2.setText("Back");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,21 +101,37 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-         this.hide();
-       Home frm = new Home();
-               frm.setVisible(true);
+        new Home().setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String name = uname.getText().toString();
+        String name = uname.getText();
         System.out.println(name);
-         String pass = password.getText().toString();
-         System.out.println(pass);
-          this.hide();
-       Layout frm = new Layout();
-               frm.setVisible(true);
-        
+        String pass = new String(password.getPassword());
+        System.out.println(pass);
+
+        loginobject login = new loginobject();
+        login.setName(name);
+        login.setPassword(pass);
+        ArrayList<Object> list = new ArrayList<>();
+        list.add(login);
+        ServerObjects doLogin = new ServerObjects();
+        doLogin.setOper(1);
+        doLogin.setObjects(list);
+        cont = new ClientController("127.0.0.1");
+        try {
+            res = ClientController.main(doLogin);
+            System.out.println("returned");
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        if (res.getReturnedValue()) {
+            Layout frm = new Layout();
+            frm.setVisible(true);
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -117,7 +146,7 @@ public class Login extends javax.swing.JFrame {
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    javax.swing.UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
                     break;
                 }
             }
@@ -133,10 +162,8 @@ public class Login extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Login().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new Login().setVisible(true);
         });
     }
 
