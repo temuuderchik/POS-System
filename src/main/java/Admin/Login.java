@@ -5,7 +5,6 @@
 package Admin;
 
 import App.Home;
-import App.Home;
 import entity.ServerObjects;
 import entity.loginobject;
 import java.io.IOException;
@@ -47,7 +46,7 @@ public class Login extends javax.swing.JFrame {
         password = new javax.swing.JPasswordField();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -128,7 +127,7 @@ public class Login extends javax.swing.JFrame {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (res.getReturnedValue()) {
-            Home frm = new Home();
+            Cashier frm = new Cashier();
             frm.setVisible(true);
             this.setVisible(false);
         }
