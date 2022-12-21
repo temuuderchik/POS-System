@@ -5,7 +5,7 @@
 package Admin;
 
 import App.Home;
-import App.Layout;
+import App.Home;
 import entity.ServerObjects;
 import entity.loginobject;
 import java.io.IOException;
@@ -128,7 +128,7 @@ public class Login extends javax.swing.JFrame {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (res.getReturnedValue()) {
-            Layout frm = new Layout();
+            Home frm = new Home();
             frm.setVisible(true);
             this.setVisible(false);
         }
