@@ -15,9 +15,18 @@ import javax.swing.Timer;
  */
 public class Home extends javax.swing.JFrame {
 
+    String ip = "127.0.0.1";
+
     /**
      * Creates new form Layout
+     *
+     * @param ip
      */
+    public Home(String ip) {
+        initComponents();
+        this.ip = ip;
+    }
+
     public Home() {
         initComponents();
     }
@@ -1807,7 +1816,7 @@ public class Home extends javax.swing.JFrame {
 
     private void JLoginLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_JLoginLabelMouseClicked
         // TODO add your handling code here:
-        new Login().setVisible(true);
+        new Login(this.ip).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_JLoginLabelMouseClicked
 

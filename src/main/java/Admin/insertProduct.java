@@ -7,17 +7,22 @@ package Admin;
 import entity.ServerObjects;
 import entity.product;
 import java.awt.Image;
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
 import java.text.NumberFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -37,13 +42,19 @@ public class insertProduct extends javax.swing.JFrame {
     String fname = null;
     int s = 0;
     byte[] pimage = null;
-    private Integer cat;
+    private Integer cat = 1;
+    private String ip = "127.0.0.1";
 
     /**
      * Creates new form insertProduct
      */
     public insertProduct() {
         initComponents();
+    }
+
+    public insertProduct(String ip) {
+        initComponents();
+        this.ip = ip;
     }
 
     /**
@@ -63,25 +74,18 @@ public class insertProduct extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        NumberFormat format = NumberFormat.getInstance();
-        NumberFormatter formatter = new NumberFormatter(format);
-        formatter.setValueClass(Integer.class);
-        formatter.setMinimum(0);
-        formatter.setMaximum(Integer.MAX_VALUE);
-        formatter.setAllowsInvalid(false);
-        formatter.setCommitsOnValidEdit(true);
-        jFormattedTextField1 = new javax.swing.JFormattedTextField(formatter);
         labelImage = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jCategory = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setResizable(false);
+        setShape(new Rectangle(0,0,-1,-1));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        imagePath.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        imagePath.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         imagePath.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 imagePathActionPerformed(evt);
@@ -95,7 +99,7 @@ public class insertProduct extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 400, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, -1));
 
         jButton2.setText("Browse");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +109,7 @@ public class insertProduct extends javax.swing.JFrame {
         });
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 340, -1, -1));
 
-        name.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 2, 0, new java.awt.Color(0, 0, 0)));
+        name.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
         name.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 nameFocusGained(evt);
@@ -123,25 +127,10 @@ public class insertProduct extends javax.swing.JFrame {
                 jButton3ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, -1, -1));
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, -1, -1));
 
         jLabel5.setText("Price");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
-
-        jFormattedTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("¤¤#,##0.00"))));
-        jFormattedTextField1.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jFormattedTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jFormattedTextField1ActionPerformed(evt);
-            }
-        });
-        jFormattedTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                jFormattedTextField1KeyPressed(evt);
-            }
-        });
-        getContentPane().add(jFormattedTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 170, -1));
 
         labelImage.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(labelImage, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 170, 120));
@@ -161,6 +150,14 @@ public class insertProduct extends javax.swing.JFrame {
         jLabel1.setText("Category");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 120, -1));
 
+        jTextField1.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
+        });
+        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 170, -1));
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -173,50 +170,56 @@ public class insertProduct extends javax.swing.JFrame {
 
         if (load == JFileChooser.APPROVE_OPTION) {
             f = fileChooser.getSelectedFile();
-
-            path = f.getAbsolutePath();
-            imagePath.setText(path);
-            ImageIcon ii = new ImageIcon(path);
-            Image img = ii.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-            labelImage.setIcon(new ImageIcon(img));
+            if (f.length() > 1000000) {
+                f = null;
+                JOptionPane.showMessageDialog(this, "Please insert lower than 1000 kb size image.", "Invalid input", JOptionPane.ERROR_MESSAGE);
+            } else {
+                path = f.getAbsolutePath();
+                imagePath.setText(path);
+                ImageIcon ii = new ImageIcon(path);
+                Image img = ii.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+                labelImage.setIcon(new ImageIcon(img));
+            }
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-
-        String title = name.getText();
-        if (title.equals("")) {
-            JOptionPane.showMessageDialog(null, "Please enter your Product Name.");
-        }
-
-        ServerObjects insertProd = new ServerObjects();
-        insertProd.setOper(9001);
-        product prod = new product();
-        prod.setProd_name(name.getText());
-        prod.setProd_cat(cat);
         try {
-            InputStream in = new FileInputStream(f);
+            // TODO add your handling code here:
+
+            String title = name.getText();
+            if (title.equals("")) {
+                JOptionPane.showMessageDialog(null, "Please enter your Product Name.");
+            }
+
+            ServerObjects insertProd = new ServerObjects();
+            insertProd.setOper(9001);
+            product prod = new product();
+            prod.setProd_name(name.getText());
+            prod.setProd_cat(cat);
+            BufferedImage bImage;
+            bImage = ImageIO.read(f);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ImageIO.write(bImage, "png", bos);
+            byte[] imgData = bos.toByteArray();
             prod.setProd_image_name(imagePath + "_" + DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss").format(LocalDateTime.now()));
-            prod.setProd_image(in.readAllBytes());
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(insertProduct.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(insertProduct.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        ArrayList<Object> list = new ArrayList<>();
-        list.add(prod);
-        insertProd.setObjects(list);
-        ClientController cont = new ClientController("127.0.0.1");
-        ServerObjects res = new ServerObjects();
-        try {
-            res = ClientController.main(insertProd);
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        JOptionPane.showMessageDialog(null, "Your product added successfully");
+            prod.setProd_image(imgData);
+            ArrayList<Object> list = new ArrayList<>();
+            list.add(prod);
+            insertProd.setObjects(list);
+            ClientController cont = new ClientController(ip);
+            ServerObjects res = new ServerObjects();
+            try {
+                res = ClientController.main(insertProd);
+            } catch (IOException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            JOptionPane.showMessageDialog(null, "Your product added successfully");
+            this.setVisible(false);
 
-        this.setVisible(false);
+        } catch (IOException ex) {
+            Logger.getLogger(insertProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -229,22 +232,6 @@ public class insertProduct extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_imagePathActionPerformed
 
-    private void jFormattedTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jFormattedTextField1ActionPerformed
-
-    }//GEN-LAST:event_jFormattedTextField1ActionPerformed
-
-    private void jFormattedTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jFormattedTextField1KeyPressed
-        // TODO add your handling code here:
-        char c = evt.getKeyChar();
-        if (Character.isLetter(c)) {
-            jFormattedTextField1.setEditable(false);
-            price_warning.setText("please enter price");
-        } else {
-            jFormattedTextField1.setEditable(true);
-            price_warning.setText(" ");
-        }
-    }//GEN-LAST:event_jFormattedTextField1KeyPressed
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
@@ -254,6 +241,17 @@ public class insertProduct extends javax.swing.JFrame {
         JComboBox cb = (JComboBox) evt.getSource();
         cat = cb.getSelectedIndex();
     }//GEN-LAST:event_jCategoryActionPerformed
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        char c = evt.getKeyChar();
+        if (Character.isLetter(c)) {
+            jTextField1.setEditable(false);
+            price_warning.setText("please enter price");
+        } else {
+            jTextField1.setEditable(true);
+            price_warning.setText(" ");
+        }
+    }//GEN-LAST:event_jTextField1KeyPressed
 
     /**
      * @param args the command line arguments
@@ -292,11 +290,11 @@ public class insertProduct extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jCategory;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel labelImage;
     private javax.swing.JTextField name;
     private javax.swing.JLabel price_warning;

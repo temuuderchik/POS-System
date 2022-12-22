@@ -10,13 +10,11 @@ package App;
  */
 public class start extends javax.swing.JFrame {
 
+    serverIP ip;
+
     /**
      * Creates new form start
      */
-    public start() {
-        initComponents();
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,6 +29,7 @@ public class start extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("LOGIN\n");
 
         jLabel1.setText("Enter IP address");
 
@@ -78,11 +77,11 @@ public class start extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        serverIP ip = new serverIP(jTextField1.getText());
+        ip = new serverIP(jTextField1.getText());
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        new Home().setVisible(true);
+        new Home(jTextField1.getText()).setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -90,7 +89,6 @@ public class start extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        serverIP ip = new serverIP("192.168.135");
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -111,11 +109,8 @@ public class start extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new start().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new start().setVisible(true);
         });
     }
 

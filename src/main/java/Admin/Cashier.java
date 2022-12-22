@@ -12,11 +12,18 @@ import java.awt.Toolkit;
  */
 public class Cashier extends javax.swing.JFrame {
 
+    private String ip = "127.0.0.1";
+
     /**
      * Creates new form Cashier
      */
     public Cashier() {
         initComponents();
+    }
+
+    public Cashier(String ip) {
+        initComponents();
+        this.ip = ip;
     }
 
     /**
@@ -96,7 +103,7 @@ public class Cashier extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        new insertProduct().setVisible(true);
+        new insertProduct(this.ip).setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

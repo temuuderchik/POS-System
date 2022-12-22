@@ -19,12 +19,18 @@ import java.util.logging.Logger;
 public class Login extends javax.swing.JFrame {
 
     ServerObjects res;
+    private String ip = "127.0.0.1";
 
     /**
      * Creates new form Login
      */
     public Login() {
         initComponents();
+    }
+
+    public Login(String ip) {
+        initComponents();
+        this.ip = ip;
     }
     ClientController cont = null;
 
@@ -107,9 +113,7 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String name = uname.getText();
-        System.out.println(name);
         String pass = new String(password.getPassword());
-        System.out.println(pass);
 
         loginobject login = new loginobject();
         login.setName(name);
@@ -119,7 +123,7 @@ public class Login extends javax.swing.JFrame {
         ServerObjects doLogin = new ServerObjects();
         doLogin.setOper(1);
         doLogin.setObjects(list);
-        cont = new ClientController("127.0.0.1");
+        cont = new ClientController(ip);
         try {
             res = ClientController.main(doLogin);
             System.out.println("returned");
@@ -127,7 +131,7 @@ public class Login extends javax.swing.JFrame {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (res.getReturnedValue()) {
-            Cashier frm = new Cashier();
+            Cashier frm = new Cashier(ip);
             frm.setVisible(true);
             this.setVisible(false);
         }
